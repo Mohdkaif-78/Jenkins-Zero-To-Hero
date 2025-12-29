@@ -55,7 +55,9 @@ pipeline {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
                     cd ${WORKSPACE}
-                    
+
+                    git config --global --add safe.directory ${WORKSPACE}
+
                     rm -rf .git
                     if [ ! -d .git ]; then
                         git init
