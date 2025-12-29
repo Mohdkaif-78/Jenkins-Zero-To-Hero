@@ -55,6 +55,14 @@ pipeline {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
                     cd ${WORKSPACE}
+
+                    if [ ! -d .git ]; then
+                        git init
+                        git remote add origin https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git
+                        git fetch origin main
+                        git checkout main
+                    fi
+
                     git config user.email "bookaif786@gmail.com"
                     git config user.name "Mohammed Samiuddin"
                     BUILD_NUMBER=${BUILD_NUMBER}
