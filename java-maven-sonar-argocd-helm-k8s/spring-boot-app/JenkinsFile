@@ -55,7 +55,8 @@ pipeline {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
                     cd ${WORKSPACE}
-
+                    
+                    rm -rf .git
                     if [ ! -d .git ]; then
                         git init
                         git remote add origin https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git
